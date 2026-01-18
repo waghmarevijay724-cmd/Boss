@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matka Result</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f2f2f2;
+}
+.card{
+  background:#ffd6ad;
+  border:2px solid #ff9800;
+  margin:10px;
+  padding:10px;
+  border-radius:10px;
+}
+.title{
+  font-size:20px;
+  font-weight:bold;
+  text-align:center;
+  color:#1a237e;
+}
+.number{
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+  color:#6a1b9a;
+  margin:5px 0;
+}
+.time{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+}
+.header{
+  background:yellow;
+  padding:10px;
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+ <marquee>
+  <h1>VIJAY MATKA</h1>
+ </marquee>
+<div class="header">MORNING RESULT</div>
+<div id="result">Loading...</div>
+
+<script>
+const apiURL = "https://script.google.com/macros/s/AKfycbxrPsSSdheT7yp0el1Jzy8MOAOhRWzaQ_PLdNU2LuBXj2DCedYnCgB3AKQv3e_JDi6e/exec";
+
+fetch(apiURL)
+.then(response => response.json())
+.then(data => {
+  let html = "";
+  data.forEach(item => {
+    html += `
+      <div class="card">
+        <div class="title">${item.name}</div>
+        <div class="number">${item.number}</div>
+        <div class="time">
+          <span>${item.open}</span>
+          <span>${item.close}</span>
+        </div>
+      </div>
+    `;
+  });
+  document.getElementById("result").innerHTML = html;
+})
+.catch(error => {
+  document.getElementById("result").innerHTML = "❌ Data load failed";
+  console.error(error);
+});
+</script>
+
+</body>
+</html>
